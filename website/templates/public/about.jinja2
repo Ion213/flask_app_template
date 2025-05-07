@@ -1,0 +1,45 @@
+{% extends 'public/public_nav.html' %}
+
+{% block title %}
+    About
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+      <h1 class="mb-4">About This App</h1>
+
+        <p class="lead">
+        This web application is built using <strong>Flask</strong>, a lightweight web framework for Python,
+        and styled with <strong>Bootstrap 5</strong>. It also uses popular JavaScript libraries such as
+        <strong>jQuery</strong>, <strong>SweetAlert2</strong>, <strong>Chart.js</strong>, and <strong>html5-qrcode</strong>
+        to enhance interactivity. You can also integrate other CSS and JavaScript libraries like <strong>Tailwind CSS</strong>,
+        <strong>Anime.js</strong>, or <strong>Luxon</strong> depending on your project needs.
+        </p>
+
+
+      <hr class="my-4">
+
+      <h3>Framework & Libraries</h3>
+        <ul class="list-unstyled">
+        <li><i class="fab fa-python me-2"></i>Flask (Python)</li>
+        <li><i class="fab fa-bootstrap me-2"></i>Bootstrap 5</li>
+        <li><i class="fab fa-js me-2"></i>jQuery</li>
+        <li><i class="fas fa-bell me-2"></i>SweetAlert2</li>
+        <li><i class="fas fa-chart-line me-2"></i>Chart.js</li>
+        <li><i class="fas fa-qrcode me-2"></i>html5-qrcode</li>
+        <li><i class="fas fa-ellipsis-h me-2"></i>And more...</li>
+        </ul>
+      <hr class="my-4">
+      <h3>Developer</h3>
+      <div class="d-flex justify-content-center gap-4">
+        <a href="https://github.com/Ion213" target="_blank" class="btn btn-dark">
+          <i class="fab fa-github me-2"></i> Flask on GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

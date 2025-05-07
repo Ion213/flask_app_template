@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    {% block title %}
+    {% endblock %}
+  </title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='js_lib/bootstrap5.3/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='js_lib/fontawesome-free-6.5.2-web/css/all.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='js_lib/sweet-alert/css/sweetalert2.min.css') }}">
+
+  <script src="{{ url_for('static', filename='js_lib/bootstrap5.3/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js_lib/jquery3.7.1/jquery-3.7.1.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js_lib/sweet-alert/js/sweetalert2@11.js') }}"></script>
+  <script src="{{ url_for('static', filename='js_lib/html5-qrcode-scanner/html5-qrcode.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js_lib/chart/chart.js') }}"></script>
+
+   <!-- Favicon -->
+   <link rel="icon" href="{{ url_for('static', filename='logo/Flask.png') }}" type="image/png">
+
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/public/public_nav.css') }}">
+</head>
+
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="{{ url_for('static', filename='logo/Flask.png') }}" alt="Logo" width="50" height="50">
+      Flask App
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link home-nav" aria-current="page" href="{{ url_for('home.home_page') }}">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link about-nav" href="{{ url_for('about.about_page') }}">About</a>
+        </li>
+      </ul>
+
+      <div class="d-flex">
+        <a href="{{ url_for('login.login_page') }}" class="btn btn-outline-light">Login</a>
+        <a href="{{ url_for('signup.signup_page') }}" class="btn btn-outline-light">Sign Up</a>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+
+
+
+<div  class="mt-4">
+  {% block content %}
+  {% endblock %}
+</div>
+
+
+</body>
+</html>
