@@ -10,3 +10,4 @@ Flask-Migrate
 flask-mail
 pymysql
 python-dotenv
+Flask-WTF
