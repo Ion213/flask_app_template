@@ -8,8 +8,11 @@
     {% endblock %}
   </title>
 
+
+
   <link rel="stylesheet" href="{{ url_for('static', filename='js_lib/bootstrap5.3/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='js_lib/fontawesome-free-6.5.2-web/css/all.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='js_lib/bootstrap-icon/bootstrap-icons.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='js_lib/sweet-alert/css/sweetalert2.min.css') }}">
 
   <script src="{{ url_for('static', filename='js_lib/bootstrap5.3/js/bootstrap.bundle.min.js') }}"></script>
@@ -17,17 +20,22 @@
   <script src="{{ url_for('static', filename='js_lib/sweet-alert/js/sweetalert2@11.js') }}"></script>
   <script src="{{ url_for('static', filename='js_lib/html5-qrcode-scanner/html5-qrcode.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js_lib/chart/chart.js') }}"></script>
+  <script src="{{ url_for('static', filename='js_lib/axios/axios.min.js') }}"></script>
+  
 
    <!-- Favicon -->
    <link rel="icon" href="{{ url_for('static', filename='logo/Flask.png') }}" type="image/png">
 
    <link rel="stylesheet" href="{{ url_for('static', filename='css/public/public_nav.css') }}">
+
+
+
 </head>
 
 <body>
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(83, 158, 214);">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <img src="{{ url_for('static', filename='logo/Flask.png') }}" alt="Logo" width="50" height="50">
@@ -49,8 +57,16 @@
       </ul>
 
       <div class="d-flex">
-        <a href="{{ url_for('login.login_page') }}" class="btn btn-outline-light">Login</a>
-        <a href="{{ url_for('signup.signup_page') }}" class="btn btn-outline-light">Sign Up</a>
+        <a href="{{ url_for('login.login_page') }}" 
+        class="btn btn-light fw-bold px-4 py-2 rounded-pill shadow-sm login-nav-btn">
+        <i class="bi bi-person-fill-lock"></i>
+          LogIn
+        </a>
+        <a href="{{ url_for('signup.signup_page') }}" 
+        class="btn btn-light fw-bold px-4 py-2 rounded-pill shadow-sm signup-nav-btn">
+          <i class="bi bi-person-fill-add"></i>
+          SignUp
+        </a>
       </div>
 
     </div>

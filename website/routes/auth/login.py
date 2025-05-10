@@ -29,4 +29,4 @@ login = Blueprint('login', __name__)
 # render schedule template
 @login.route('/login_page', methods=['GET'])
 def login_page():
-    return render_template('public/login.jinja2')
+    return render_template('auth/login.jinja2')

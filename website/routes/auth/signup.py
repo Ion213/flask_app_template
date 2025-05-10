@@ -22,6 +22,8 @@ from sqlalchemy import or_,and_,extract
 from sqlalchemy.sql import func
 
 
+from website.models.database_models import User
+
 manila_tz = timezone('Asia/Manila')
 
 signup = Blueprint('signup', __name__)
@@ -29,4 +31,13 @@ signup = Blueprint('signup', __name__)
 # render schedule template
 @signup.route('/signup_page', methods=['GET'])
 def signup_page():
-    return render_template('public/signup.jinja2')
+    return render_template('auth/signup.jinja2')
+
+# render schedule template
+@signup.route('/signup_submit', methods=['GET'])
+def signup_submit():
+    
+    pass
+    
+    
+

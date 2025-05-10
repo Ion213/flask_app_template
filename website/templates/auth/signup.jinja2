@@ -1,0 +1,111 @@
+{% extends 'public/public_nav.html' %}
+
+{% block title %}
+    SignUp
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth/auth.css') }}">
+
+<style>
+/* Make the SweetAlert2 modal slightly wider */
+.custom-swal-popup {
+    background-color: rgba(2, 14, 11, 0.531) !important; 
+    color: #ffffff !important;
+    width: 15rem !important;
+    padding: 1.5rem;
+    border-radius: 5rem;
+}
+
+/* Customize the confirm button */
+.swal2-confirm {
+    background-color: #3bd7f6 !important;  /* Tailwind's blue-500 */
+    color: white !important;
+    border: none !important;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+</style>
+
+
+<div class="center-wrapper">
+
+  <div class="card">
+    <h4 class="mb-4 text-center">Sign Up</h4>
+    <form id="signup_form">
+
+      <div class="form-group mb-3"">
+        <div class="input-group">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="first_name" placeholder="First Name" required>
+            <label for="first_name">First Name</label>
+          </div>
+          <div class="form-floating">
+            <input type="text" class="form-control" id="last_name" placeholder="Last Name" required>
+            <label for="last_name">Last Name</label>
+          </div>
+        </div> 
+      </div>
+
+      <div class="form-group mb-3"">
+        <div class="input-group">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="user_id" placeholder="ID No." pattern="^\d+(?:-\d+)+$" required>
+            <label for="user_id">ID No.</label>
+          </div>
+          <div class="form-floating">
+            <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+            <label for="email">Email</label>
+          </div>
+        </div>
+        <small id="id-format" class="text-danger d-none"></small>
+        <small id="email-format" class="text-danger d-none"></small>
+      </div>
+      
+      <div class="form-group mb-3"">
+        <div class="input-group">
+        
+          <div class="form-floating">
+            <input type="password" class="form-control" id="password" placeholder="Password" minlength="6" maxlength="20" required>
+            <label for="password">Password</label>
+          </div>
+          <button class="password-toggle" type="button" id="togglePassword" 
+          style="background-color: rgba(0, 255, 255, 0.464); border:0px; border-radius:5px">
+                <i class="fas fa-eye"></i>
+          </button>
+
+          <div class="form-floating">
+            <input type="password" class="form-control" id="confirm_password" placeholder="Confirm Password" minlength="6" maxlength="20" required>
+            <label for="confirm_password">Confirm Pass.</label>
+          </div>
+          <button class="password-toggle" type="button" id="toggleConfirmPassword" 
+          style="background-color: rgba(0, 255, 255, 0.464); border:0px; border-radius:5px">
+                <i class="fas fa-eye"></i>
+          </button>
+
+        </div>
+        <small id="password-strength" class="text-danger d-none"></small>
+        <small id="password-match" class="text-danger d-none"></small>
+      </div>
+
+      <button class="btn btn-primary w-100" id="signup-btn"  type="submit">Create Account</button>
+
+      <hr>
+
+      <div class="mt-3 text-center">
+        <p>Already have an account? <a href="{{ url_for('login.login_page') }}" class="small">Login</a></p>
+      </div>
+
+    </form>
+  </div>
+  
+</div>
+
+  <script src="{{ url_for('static', filename='js/auth/signup_form_checker.js') }}"></script>
+ <script src="{{ url_for('static', filename='js/auth/signup.js') }}"></script>
+
+
+
+{% endblock %}

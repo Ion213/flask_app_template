@@ -39,7 +39,7 @@ def create_database(app):
 
 
 # Cookies config   
-def cookies_config(app):
+def keys_cookies_config(app):
     app.config['SECRET_KEY'] = SECRET_KEY
     app.config['REMEMBER_COOKIE_DURATION'] = timedelta(days=7)
     
