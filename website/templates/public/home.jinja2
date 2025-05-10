@@ -6,47 +6,57 @@ Home
 
 {% block content %}
 
-<section class="py-5 bg-light text-center">
-  <div class="container">
-    <h1 class="display-4">Welcome to Flask App</h1>
-    <p class="lead">A simple and powerful web app built with Flask(Python)</p>
-    <a href="https://flask.palletsprojects.com/en/stable/installation/" class="btn btn-primary btn-lg mt-3">View Guide</a>
-  </div>
-</section>
+<div class="container mt-5">
+  <section class="py-5 bg-light text-center">
+    <div class="container">
+      <h1 class="display-4">Welcome to Flask App</h1>
+      <p class="lead">A simple and powerful web app built with Flask(Python)</p>
+      <a href="https://flask.palletsprojects.com/en/stable/installation/" class="btn btn-primary btn-lg mt-3">View Guide</a>
+    </div>
+  </section>
 
-<section class="py-5">
-  <div class="container">
-    <h2 class="text-center mb-4">Features</h2>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body text-center">
-            <i class="fas fa-bolt fa-2x text-primary mb-3"></i>
-            <h5 class="card-title">Fast</h5>
-            <p class="card-text">Built for speed and performance using Flask's lightweight architecture.</p>
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Features</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+              <i class="fas fa-bolt fa-2x text-primary mb-3"></i>
+              <h5 class="card-title">Fast</h5>
+              <p class="card-text">Built for speed and performance using Flask's lightweight architecture.</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body text-center">
-            <i class="fas fa-mobile-alt fa-2x text-success mb-3"></i>
-            <h5 class="card-title">Responsive</h5>
-            <p class="card-text">Responsive and dynamic design powered by Bootstrap and jQuery for seamless user interaction.</p>
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+              <i class="fas fa-mobile-alt fa-2x text-success mb-3"></i>
+              <h5 class="card-title">Responsive</h5>
+              <p class="card-text">Responsive and dynamic design powered by Bootstrap and jQuery for seamless user interaction.</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body text-center">
-            <i class="fas fa-cogs fa-2x text-danger mb-3"></i>
-            <h5 class="card-title">Customizable</h5>
-            <p class="card-text">Easily extend or modify features to fit your project needs.</p>
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+              <i class="fas fa-cogs fa-2x text-danger mb-3"></i>
+              <h5 class="card-title">Customizable</h5>
+              <p class="card-text">Easily extend or modify features to fit your project needs.</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
+</div>
+
+<script>
+//Nav active state
+$(document).ready(function(){
+  $('.nav-link').removeClass('active')
+  $('.home-nav').addClass('active');
+})
+</script>
 {% endblock %}

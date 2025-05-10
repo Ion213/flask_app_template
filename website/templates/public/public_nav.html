@@ -39,7 +39,6 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <img src="{{ url_for('static', filename='logo/Flask.png') }}" alt="Logo" width="50" height="50">
-      Flask App
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -74,12 +73,8 @@
 </nav>
 
 
-
-
-<div  class="mt-4">
   {% block content %}
   {% endblock %}
-</div>
 
 
 </body>
