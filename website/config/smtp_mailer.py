@@ -8,21 +8,21 @@ from website.config.env_loader import (
 )
 
 # send email verification link
-def send_verification_email(email, confirm_url):
+def send_verification_email(email, link):
     msg = Message('Confirm Your Email', sender=GMAIL, recipients=[email])
     msg.body = (
         f"Hello,\n\n"
         f"Please confirm your email address by clicking the link below:\n"
-        f"{confirm_url}\n\n"
+        f"{link}\n\n"
         f"This link will expire in 3 minutes. If you didn’t request this, please ignore it."
         f"Do not share this link with anyone."
     )
     mail.send(msg)
     
 # Send reset password link
-def send_reset_password_link(email,reset_url):
+def send_reset_password_link(email,reset_link):
     msg = Message('Password Reset Request', sender=GMAIL, recipients=[email])
-    msg.body = f'Click the link to reset your password: {reset_url}'
+    msg.body = f'Click the link to reset your password: {reset_link}'
     mail.send(msg)
 
 # Secure serializer (initialize in flask_app)

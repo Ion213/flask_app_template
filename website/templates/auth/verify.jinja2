@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='js_lib/bootstrap5.3/css/bootstrap.min.css') }}">
+    <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='logo/Flask.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth/auth.css') }}">
+</head>
+<body>
+<div class="center-wrapper">
+  <div class="card">
+    <h4 class="mb-4 text-center">Email Verification</h4>
+
+    {% if message %}
+      <div class="alert {{ 'alert-success' if success else 'alert-danger' }} text-center mb-4">
+        <strong>{{ message }}</strong>
+      </div>
+    {% endif %}
+
+    <form action="{{ url_for('verify.resend_link') }}" method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+      {% if not success %}
+      <div class="form-group mb-3">
+        <div class="input-group">
+          <div class="form-floating">
+            <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
+            <label for="email">Email</label>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary w-100" id="resend-btn" type="submit">Resend Link</button>
+      <hr>
+
+      {% else %}
+      <a href="{{ url_for('login.login_page') }}" class="btn btn-primary btn-lg w-100 mt-3">Login</a>
+      {% endif %}
+    </form>
+
+  </div>
+</div>
+
+</body>
+</html>

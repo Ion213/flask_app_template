@@ -10,7 +10,7 @@ import re
 
 #csrf token checker --for every routes more secure every request
 def check_csrf():
-    csrf_token = request.headers.get('X-CSRFToken')
+    csrf_token = request.headers.get('X-CSRFToken') or request.form.get('csrf_token')
     if not csrf_token:
         raise ValidationError("Missing CSRF token.")
     validate_csrf(csrf_token)
@@ -23,15 +23,11 @@ def hash_password(password):
 def verify_password(hashed, password):
     return check_password_hash(hashed, password)
 
-
-
-
 #email check format
 def check_email_format(email):    
     email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     if not re.match(email_pattern, email):
         return jsonify({'success': False, 'message': 'Invalid email format.'})
-    
 #check password strength
 def check_password_strength(password):
     password_pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,20}$'
@@ -44,9 +40,6 @@ def check_id_format(user_ID):
         return jsonify({'success': False, 'message': 'Invalid Student ID format. It should be numbers separated by hyphens (e.g., 2017-21-00062).'})
         
     
-    
-    
-        
 #-----------------check if the user is allowed in particular routes
 def role_required_multiple(*required_roles):  # Accepts multiple roles as arguments
     def decorator(func):

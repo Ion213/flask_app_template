@@ -30,13 +30,12 @@ from website.config.security import (
     check_id_format
     )
 
-#for smtp
-'''
+
 from website.config.smtp_mailer import(
     get_serializer,
     send_verification_email
 )
-'''
+
 
 from website.config.modules import db
 from website.models.database_models import User
@@ -122,17 +121,13 @@ def signup_submit():
         )
         db.session.add(new_user)
         db.session.commit()
-        
-        
-        #for smtp email verification if needed
-        '''
+
         # Generate verification token
         serializer = get_serializer()
         token = serializer.dumps(email, salt='email-confirm')
-        confirm_url = url_for('verify_email.confirm_email', token=token, _external=True)
+        link = url_for('verify.verify_email', token=token, _external=True)
         # Send verification email
-        send_verification_email(email, confirm_url)
-        '''
+        send_verification_email(email, link)
         
         return jsonify({
             'success': True,
