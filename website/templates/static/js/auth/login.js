@@ -7,7 +7,7 @@ $(document).ready(function(){
 
     // Reusable SweetAlert2 dialog
     function customSwal(title, message, icon = 'info', timer = 3000) {
-        Swal.fire({
+       return Swal.fire({
             icon: icon,
             title: `<span style="font-size: 1.5rem;">${title}</span>`,
             html: `<div style="font-size: 1.1rem;">${message}</div>`,
@@ -46,6 +46,10 @@ $(document).ready(function(){
                 if (response.data.success) {
                     swal.close();
                     customSwal('',`${response.data.message}`,'success',3000)
+                    //redirect logic here if needed
+                    .then(() => {
+                        window.location.href = response.data.redirect; // 👈 redirects to user page ! change the backend url_for
+                      });
 
                 } else {
                     swal.close();

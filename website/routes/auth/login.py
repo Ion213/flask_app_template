@@ -22,11 +22,11 @@ from sqlalchemy import or_,and_,extract
 from sqlalchemy.sql import func
 
 
-from flask_wtf.csrf import validate_csrf
-from wtforms.validators import ValidationError
-from werkzeug.security import generate_password_hash, check_password_hash
-
-
+from website.config.security import (
+    check_csrf,
+    check_email_format,
+    verify_password
+)
 from website.models.database_models import User
 
 manila_tz = timezone('Asia/Manila')
@@ -38,13 +38,13 @@ login = Blueprint('login', __name__)
 def login_page():
     return render_template('auth/login.jinja2')
 
+
 #login submit
 @login.route('/login_submit', methods=['POST'])
 def login_submit():
     try:
-        csrf_token = request.headers.get('X-CSRFToken')
-        validate_csrf(csrf_token)
         
+        check_csrf()
         data = request.get_json()
         email = data.get('email')
         password = data.get('password')
@@ -53,17 +53,25 @@ def login_submit():
             return jsonify({'success': False, 'message': 'Please provide email'})
         if not password:
             return jsonify({'success': False, 'message': 'Please provide password'})
-
+        
+        invalid_email=check_email_format(email)
+        if invalid_email:return invalid_email
+        
         user = User.query.filter_by(email=email).first()
 
         if not user:
             return jsonify({'success': False, 'message': 'Invalid email or password'})
 
-        if not check_password_hash(user.password, password):
+        if not verify_password(user.password, password):
             return jsonify({'success': False, 'message': 'Invalid email or password'})
 
-        # You can use login_user(user) here if using Flask-Login
-        return jsonify({'success': True, 'message': 'Login successful'})
+        # more logic here if needed like role base conditions
+        
+        return jsonify({
+            'success': True, 
+            'message': 'Login successful',
+            'redirect': url_for('login.login_page') #change this to the actual user page if you implemented
+            }) 
 
     except Exception as e:
         return jsonify({'success': False, 'message': str(e)})

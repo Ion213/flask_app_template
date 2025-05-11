@@ -8,6 +8,7 @@ $(document).ready(function () {
         icon.toggleClass("fa-eye fa-eye-slash");
     });
     
+    /*
     //check password stregnth
     $('#password').on('input', function () {
         const password = $(this).val().trim();
@@ -26,6 +27,7 @@ $(document).ready(function () {
                 .text('Password is Valid✔');
         }
     });
+    */
 
     //check email format
     $('#email').on('input', function () {

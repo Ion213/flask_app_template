@@ -1,14 +1,11 @@
 $(document).ready(function () {
-    
     const csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     axios.defaults.headers.common['X-CSRFToken'] = csrf_token;
-
-
     $('.signup-nav-btn').hide();
 
     // Reusable SweetAlert2 dialog
     function customSwal(title, message, icon = 'info', timer = 3000) {
-        Swal.fire({
+        return Swal.fire({
             icon: icon,
             title: `<span style="font-size: 1.5rem;">${title}</span>`,
             html: `<div style="font-size: 1.1rem;">${message}</div>`,
@@ -24,6 +21,12 @@ $(document).ready(function () {
     // signup submit
     $('#signup_form').on('submit', function (e) {
         e.preventDefault();
+
+        Swal.fire({
+            title: 'Proccessing...',
+            allowOutsideClick: false,
+            didOpen: () => Swal.showLoading()
+        });
     
         const first_name = $('#first_name').val();
         const last_name = $('#last_name').val();
@@ -48,14 +51,19 @@ $(document).ready(function () {
 
             .then(function (response) {
                 if (response.data.success) {
+                    Swal,close()
                     customSwal('',`${response.data.message}`,'success',3000)
-
+                    .then(() => {
+                        window.location.href = response.data.redirect; // 👈 redirects to /login
+                      });
                 } else {
+                    swal.close()
                     customSwal('',`${response.data.message}`,'error',5000)
 
                 }
             })
             .catch(function (error) {
+                swal.close()
                 const message = error.response?.data?.message || error.message || "Unknown error";
                 customSwal('', `${message}`, 'error', 5000);
             });

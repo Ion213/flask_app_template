@@ -7,7 +7,7 @@ from website.config.env_loader import (
     SECRET_KEY
 )
 
-# Secure email verification
+# send email verification link
 def send_verification_email(email, confirm_url):
     msg = Message('Confirm Your Email', sender=GMAIL, recipients=[email])
     msg.body = (
@@ -19,7 +19,7 @@ def send_verification_email(email, confirm_url):
     )
     mail.send(msg)
     
-# Send reset email
+# Send reset password link
 def send_reset_password_link(email,reset_url):
     msg = Message('Password Reset Request', sender=GMAIL, recipients=[email])
     msg.body = f'Click the link to reset your password: {reset_url}'

@@ -27,9 +27,7 @@ def database_config(app):
     else:
         print("⚠️  DATABASE_URL is not set. Using SQLite instead.")
         db_path = os.path.join(app.root_path, 'sqlite_db', DB_NAME)
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path
- 
-        
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path      
 # Create database if it doesn't exist
 def create_database(app):
     db_path = os.path.join(app.root_path, 'sqlite_db', DB_NAME)
@@ -38,7 +36,7 @@ def create_database(app):
             db.create_all()
 
 
-# Cookies config   
+# Cookies and keys config   
 def keys_cookies_config(app):
     app.config['SECRET_KEY'] = SECRET_KEY
     app.config['REMEMBER_COOKIE_DURATION'] = timedelta(days=7)

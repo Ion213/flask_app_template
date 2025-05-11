@@ -21,10 +21,22 @@ from datetime import datetime
 from sqlalchemy import or_,and_,extract
 from sqlalchemy.sql import func
 
-from flask_wtf.csrf import validate_csrf
-from wtforms.validators import ValidationError
-from werkzeug.security import generate_password_hash, check_password_hash
+#-----------------
+from website.config.security import (
+    check_csrf,
+    hash_password,
+    check_email_format,
+    check_password_strength,
+    check_id_format
+    )
 
+#for smtp
+'''
+from website.config.smtp_mailer import(
+    get_serializer,
+    send_verification_email
+)
+'''
 
 from website.config.modules import db
 from website.models.database_models import User
@@ -42,9 +54,8 @@ def signup_page():
 @signup.route('/signup_submit', methods=['POST'])
 def signup_submit():
     try:
-        csrf_token = request.headers.get('X-CSRFToken')
-        validate_csrf(csrf_token)
-        
+
+        check_csrf()
         data = request.get_json()
         first_name=data.get('first_name')
         last_name = data.get('last_name')
@@ -53,6 +64,7 @@ def signup_submit():
         password = data.get('password')
         confirm_password = data.get('confirm_password')
         
+        #check all fields if empty
         if not first_name:
             return jsonify({'success': False, 'message':'Please provide first name'})
         if not last_name:
@@ -69,40 +81,65 @@ def signup_submit():
         # Check if password and confirm password match
         if password != confirm_password:
             return jsonify({'success': False, 'message': 'Passwords do not match'})
+        #check password length
+        if not (6 <= len(password) <= 20):
+                return jsonify({'success': False, 'message': 'Password must be 6-20 characters'})
+            
+        invalid_email=check_email_format(email)
+        invalid_password=check_password_strength(password)
+        invalid_id=check_id_format(user_id)
+        if invalid_email:return invalid_email
+        if invalid_password:return invalid_password
+        if invalid_id: return invalid_id
         
-        # Check if user already exists
+        
+        # Check if user name already exists
         existing_user_name = User.query.filter_by(
             first_name=first_name,
             last_name=last_name,
             ).first()
         if existing_user_name:
             return jsonify({'success': False, 'message': 'User already exist'})
-        
+        #check if ID is already used
         existing_id = User.query.filter_by(
             user_ID=user_id,
             ).first()
         if existing_id:
             return jsonify({'success': False, 'message': 'User ID already used'})
-        
+        #check if email already used
         existing_email= User.query.filter_by(
             email=email
             ).first()
         if existing_email:
             return jsonify({'success': False, 'message': 'Email already used'})
         
-        # Create the new user (hash password before storing)
-        hashed_password = generate_password_hash(password)
         new_user = User(
             first_name=first_name,
             last_name=last_name,
             user_ID=user_id,
             email=email,
-            password=hashed_password
+            password=hash_password(password)
         )
         db.session.add(new_user)
         db.session.commit()
         
-        return jsonify({'success': True, 'message': 'SignUp Successfully'})
+        
+        #for smtp email verification if needed
+        '''
+        # Generate verification token
+        serializer = get_serializer()
+        token = serializer.dumps(email, salt='email-confirm')
+        confirm_url = url_for('verify_email.confirm_email', token=token, _external=True)
+        # Send verification email
+        send_verification_email(email, confirm_url)
+        '''
+        
+        return jsonify({
+            'success': True,
+            'message': 'SignUp Successfully',
+            'redirect': url_for('login.login_page')
+        })
+        
     except Exception as e:
         db.session.rollback()
         return jsonify({'success': False, 'message': str(e)})
