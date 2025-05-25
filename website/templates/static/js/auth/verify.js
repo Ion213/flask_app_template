@@ -1,7 +1,8 @@
 $(document).ready(function () {
+
     const csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     axios.defaults.headers.common['X-CSRFToken'] = csrf_token;
-    $('.signup-nav-btn').hide();
+
 
     // Reusable SweetAlert2 dialog
     function customSwal(title, message, icon = 'info', timer = 3000) {
@@ -18,8 +19,8 @@ $(document).ready(function () {
     }
 //--------------
 
-    // signup submit
-    $('#signup_form').on('submit', function (e) {
+    // verification submit
+    $('#verify_form').on('submit', function (e) {
         e.preventDefault();
 
         Swal.fire({
@@ -27,35 +28,16 @@ $(document).ready(function () {
             allowOutsideClick: false,
             didOpen: () => Swal.showLoading()
         });
-    
-        const first_name = $('#first_name').val();
-        const last_name = $('#last_name').val();
-        const user_id = $('#user_id').val();
         const email = $('#email').val();
-        const password = $('#password').val();
-        const confirm_password = $('#confirm_password').val();
 
-        submit_signup(first_name, last_name,user_id, email, password,confirm_password);
+        submit_verify(email);
     });
-
-    function submit_signup(first_name, last_name,user_id, email, password,confirm_password) {
-        axios.post('/auth/signup_submit', { 
-                first_name: first_name, 
-                last_name: last_name, 
-                user_id:user_id,
-                email: email, 
-                password: password, 
-                confirm_password: confirm_password 
-            }
-        )
-
+    function submit_verify(email) {
+        axios.post('/auth/resend_link', {email: email })
             .then(function (response) {
                 if (response.data.success) {
-                    Swal,close()
+                    Swal.close()
                     customSwal('',`${response.data.message}`,'success',5000)
-                    .then(() => {
-                        window.location.href = response.data.redirect; // 👈 redirects to /login
-                      });
                 } else {
                     swal.close()
                     customSwal('',`${response.data.message}`,'error',5000)

@@ -19,3 +19,8 @@ def routes_list(app):
     
     from website.routes.auth.verify import verify
     app.register_blueprint(verify, url_prefix='/auth')
+    
+    from website.routes.auth.forgot_pass import forgot_pass
+    app.register_blueprint(forgot_pass, url_prefix='/auth')
+    
+    

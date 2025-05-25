@@ -13,16 +13,21 @@ def send_verification_email(email, link):
     msg.body = (
         f"Hello,\n\n"
         f"Please confirm your email address by clicking the link below:\n"
-        f"{link}\n\n"
+        f"{link}\n"
         f"This link will expire in 3 minutes. If you didn’t request this, please ignore it."
         f"Do not share this link with anyone."
     )
     mail.send(msg)
     
 # Send reset password link
-def send_reset_password_link(email,reset_link):
+def send_reset_password_link(email,link):
     msg = Message('Password Reset Request', sender=GMAIL, recipients=[email])
-    msg.body = f'Click the link to reset your password: {reset_link}'
+    msg.body = (
+        f"Hello,\n\n"
+        f"Click the link to reset your password: {link}\n"
+        f"This link will expire in 3 minutes. If you didn’t request this, please ignore it."
+        f"Do not share this link with anyone."
+    )
     mail.send(msg)
 
 # Secure serializer (initialize in flask_app)

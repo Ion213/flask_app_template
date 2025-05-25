@@ -1,0 +1,40 @@
+{% extends 'public/public_nav.html' %}
+
+{% block title %}
+    Forgot Password
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth/auth.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sweetAlert.css') }}">
+
+<div class="center-wrapper">
+  <div class="card">
+    <h4 class="mb-4 text-center"> Forgot Password</h4>
+    <form id="forgot_form">
+      <div class="form-group mb-3"">
+        <div class="input-group">
+          <div class="form-floating">
+            <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+            <label for="email">Email</label>
+          </div>
+        </div>
+        <small id="email-format" class="text-danger d-none"></small>
+      </div>
+
+      <button class="btn btn-primary w-100" id="send_link-btn" type="submit">Send Reset Link</button>
+      <hr>
+      <div class="mt-3 text-center">
+        <p>Back to LogIn page? <a href="{{ url_for('login.login_page') }}" class="small">LogIn</a></p>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/auth/forgot_pass.js') }}"></script>
+<script src="{{ url_for('static', filename='js/auth/form_check/forgot_pass_form_checker.js') }}"></script>
+
+
+{% endblock %}

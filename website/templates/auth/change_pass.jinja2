@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Password</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='js_lib/bootstrap5.3/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js_lib/fontawesome-free-6.5.2-web/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js_lib/bootstrap-icon/bootstrap-icons.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js_lib/sweet-alert/css/sweetalert2.min.css') }}">
+
+    <script src="{{ url_for('static', filename='js_lib/bootstrap5.3/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js_lib/jquery3.7.1/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js_lib/sweet-alert/js/sweetalert2@11.js') }}"></script>
+    <script src="{{ url_for('static', filename='js_lib/axios/axios.min.js') }}"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='logo/Flask.png') }}" type="image/png">
+
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth/auth.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sweetAlert.css') }}">
+
+</head>
+<body>
+<div class="center-wrapper">
+  <div class="card">
+    <h4 class="mb-4 text-center">Reset Password</h4>
+
+    {% if message %}
+      <div class="alert {{ 'alert-success' if success else 'alert-danger' }} text-center mb-4">
+        <strong>{{ message }}</strong>
+      </div>
+    {% endif %}
+
+
+    <form class="{{ '' if not success else 'd-none' }}" id="resend_reset_link_form">
+      <div class="form-group mb-3">
+        <div class="input-group">
+          <div class="form-floating">
+            <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+            <label for="email">Email</label>
+          </div>
+        </div>
+        <small id="email-format" class="text-danger d-none"></small>
+      </div>
+      <button class="btn btn-primary w-100" id="resend_reset_link-btn" type="submit">Resend Reset Link</button>
+    </form>
+
+
+    <form class="{{ '' if success else 'd-none' }}" id="change_pass_form"  data-link_token="{{ token }}">
+        <div class="form-group mb-3">
+          <div class="input-group">
+            <div class="form-floating">
+              <input type="password" class="form-control" id="new_password" placeholder="Password" minlength="6" maxlength="20" required>
+              <label for="new_password">New Password</label>
+            </div>
+            <button class="password-toggle" type="button" id="togglePassword" 
+            style="background-color: rgba(0, 255, 255, 0.464); border:0px; border-radius:5px">
+                  <i class="fas fa-eye"></i>
+            </button>
+          </div>
+          <small id="password-strength" class="text-danger d-none"></small>
+        </div>
+
+        <div class="form-group mb-3">
+          <div class="input-group">
+            <div class="form-floating">
+              <input type="password" class="form-control" id="confirm_new_password" placeholder="Confirm Password" minlength="6" maxlength="20" required>
+              <label for="confirm_new_password">Confirm New Pass.</label>
+            </div>
+            <button class="password-toggle" type="button" id="toggleConfirmPassword" 
+            style="background-color: rgba(0, 255, 255, 0.464); border:0px; border-radius:5px">
+                  <i class="fas fa-eye"></i>
+            </button>
+          </div>
+          <small id="password-match" class="text-danger d-none"></small>
+        </div>
+        <button class="btn btn-primary w-100" id="change_pass-btn" type="submit">Change Password</button>
+    </form>
+
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/auth/change_pass.js') }}"></script>
+<script src="{{ url_for('static', filename='js/auth/form_check/change_pass_form_checker.js') }}"></script>
+
+
+  
+</body>
+</html>

@@ -1,0 +1,18 @@
+/* Make the SweetAlert2 modal slightly wider */
+.custom-swal-popup {
+    background-color: rgba(10, 112, 86, 0.885) !important; 
+    color: #ffffff !important;
+    width: 20rem !important;
+    padding: 1.5rem;
+    border-radius: 5rem;
+}
+
+/* Customize the confirm button */
+.swal2-confirm {
+    background-color: #3bd7f6 !important;  /* Tailwind's blue-500 */
+    color: white !important;
+    border: none !important;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}

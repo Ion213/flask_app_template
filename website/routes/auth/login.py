@@ -33,7 +33,7 @@ manila_tz = timezone('Asia/Manila')
 
 login = Blueprint('login', __name__)
 
-# render schedule template
+# render login template
 @login.route('/login_page', methods=['GET'])
 def login_page():
     return render_template('auth/login.jinja2')

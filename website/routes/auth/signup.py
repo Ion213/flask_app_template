@@ -93,9 +93,9 @@ def signup_submit():
         
         
         # Check if user name already exists
-        existing_user_name = User.query.filter_by(
-            first_name=first_name,
-            last_name=last_name,
+        existing_user_name = User.query.filter(
+            func.lower(first_name)==func.lower(first_name),
+            func.lower(last_name)==func.lower(last_name),
             ).first()
         if existing_user_name:
             return jsonify({'success': False, 'message': 'User already exist'})
@@ -125,7 +125,7 @@ def signup_submit():
         # Generate verification token
         serializer = get_serializer()
         token = serializer.dumps(email, salt='email-confirm')
-        link = url_for('verify.verify_email', token=token, _external=True)
+        link = url_for('verify.verify_email_page', token=token, _external=True)
         # Send verification email
         send_verification_email(email, link)
         

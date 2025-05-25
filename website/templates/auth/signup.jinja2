@@ -7,33 +7,14 @@
 {% block content %}
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/auth/auth.css') }}">
-
-<style>
-/* Make the SweetAlert2 modal slightly wider */
-.custom-swal-popup {
-    background-color: rgba(10, 112, 86, 0.885) !important; 
-    color: #ffffff !important;
-    width: 20rem !important;
-    padding: 1.5rem;
-    border-radius: 5rem;
-}
-
-/* Customize the confirm button */
-.swal2-confirm {
-    background-color: #3bd7f6 !important;  /* Tailwind's blue-500 */
-    color: white !important;
-    border: none !important;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-}
-</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sweetAlert.css') }}">
 
 
 <div class="center-wrapper">
 
   <div class="card">
     <h4 class="mb-4 text-center">Sign Up</h4>
+
     <form id="signup_form">
 
       <div class="form-group mb-3"">
@@ -99,11 +80,12 @@
       </div>
 
     </form>
+    
   </div>
   
 </div>
 
-  <script src="{{ url_for('static', filename='js/auth/signup_form_checker.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/auth/form_check/signup_form_checker.js') }}"></script>
  <script src="{{ url_for('static', filename='js/auth/signup.js') }}"></script>
 
 

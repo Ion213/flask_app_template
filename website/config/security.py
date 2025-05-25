@@ -39,7 +39,9 @@ def check_id_format(user_ID):
     if not re.match(id_pattern, user_ID):
         return jsonify({'success': False, 'message': 'Invalid Student ID format. It should be numbers separated by hyphens (e.g., 2017-21-00062).'})
         
-    
+  
+  
+  
 #-----------------check if the user is allowed in particular routes
 def role_required_multiple(*required_roles):  # Accepts multiple roles as arguments
     def decorator(func):
@@ -50,7 +52,6 @@ def role_required_multiple(*required_roles):  # Accepts multiple roles as argume
             return func(*args, **kwargs)
         return wrapper
     return decorator
-
 
 #-----------------check if already login or not
 def is_user_authenticated(role):

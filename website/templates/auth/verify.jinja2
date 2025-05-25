@@ -5,9 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email Verification</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='js_lib/bootstrap5.3/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js_lib/fontawesome-free-6.5.2-web/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js_lib/bootstrap-icon/bootstrap-icons.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js_lib/sweet-alert/css/sweetalert2.min.css') }}">
+
+    <script src="{{ url_for('static', filename='js_lib/bootstrap5.3/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js_lib/jquery3.7.1/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js_lib/sweet-alert/js/sweetalert2@11.js') }}"></script>
+    <script src="{{ url_for('static', filename='js_lib/axios/axios.min.js') }}"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon -->
     <link rel="icon" href="{{ url_for('static', filename='logo/Flask.png') }}" type="image/png">
+
+    
     <link rel="stylesheet" href="{{ url_for('static', filename='css/auth/auth.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sweetAlert.css') }}">
+
 </head>
 <body>
 <div class="center-wrapper">
@@ -20,17 +33,16 @@
       </div>
     {% endif %}
 
-    <form action="{{ url_for('verify.resend_link') }}" method="post">
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-
+    <form id="verify_form">
       {% if not success %}
       <div class="form-group mb-3">
         <div class="input-group">
           <div class="form-floating">
-            <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
+            <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
             <label for="email">Email</label>
           </div>
         </div>
+        <small id="email-format" class="text-danger d-none"></small>
       </div>
       <button class="btn btn-primary w-100" id="resend-btn" type="submit">Resend Link</button>
       <hr>
@@ -42,6 +54,7 @@
 
   </div>
 </div>
-
+  <script src="{{ url_for('static', filename='js/auth/verify.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/auth/form_check/verify_form_checker.js') }}"></script>
 </body>
 </html>
